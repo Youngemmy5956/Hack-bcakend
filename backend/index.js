@@ -18,6 +18,11 @@ const io = new Server(server, {
   }
 });
 
+// console.log(process.env)
+// console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY);
+// console.log('MONGODB_PASSWORD:', process.env.MONGODB_PASSWORD);
+
+
 app.use(express.json());
 app.use(cors());
 

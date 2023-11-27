@@ -1,17 +1,20 @@
 import Client from "../models/Client.js";
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+
 // import dotenv from "dotenv";
 
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
+
 export const addClient = async (req, res) => {
     try {
         // Check if the user is a business owner
-        if (req.user.role !== 'businessOwner') {
-            return res.status(403).json({ error: 'Only business owners can create clients' });
-        }
-
+        // if (req.user.role !== 'businessOwner') {
+        //     return res.status(403).json({ error: 'Only business owners can create clients' });
+        // }
         const client = new Client({ ...req.body, businessOwner: req.user._id });
         await client.save();
         const token = jwt.sign({ _id: client._id }, JWT_SECRET_KEY);

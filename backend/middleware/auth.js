@@ -1,17 +1,21 @@
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const env = process.env.JWT_SECRET_KEY;
+const config = process.env.JWT_SECRET_KEY;
 
 // console.log(process.env)
-console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY);
-console.log('MONGODB_PASSWORD:', process.env.MONGODB_PASSWORD);
+// console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY);
+// console.log('MONGODB_PASSWORD:', process.env.MONGODB_PASSWORD);
 
 
 const verifyToken = (req, res, next) => {
   // Check if config is defined
-  if (!env) {
-    return res.status(500).json({ message: "Secret key is not set" });
-  }
+ 
+if (!config) {
+  console.error("Secret key is not set");
+  process.exit(1);
+}
 
   const authHeader = req.headers["authorization"]?.split(" ");
   if (req.headers["authorization"]) {

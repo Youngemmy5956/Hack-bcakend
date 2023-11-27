@@ -1,6 +1,9 @@
 import BusinessOwner from "../models/BusinessOwner.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 // export const addBusinessOwner = async (req, res) => {
 //     try {
@@ -30,7 +33,6 @@ export const signup = async (req, res, next) => {
     await businessOwner.save();
 
     const maxAge = 3 * 60 * 60;
-    console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY); // Log the JWT_SECRET_KEY
     const token = jwt.sign(
       { id: businessOwner._id, name },
       process.env.JWT_SECRET_KEY,
