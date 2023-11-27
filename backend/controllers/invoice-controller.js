@@ -1,6 +1,14 @@
 // import jwt from 'jsonwebtoken';
 
+import express from 'express';
+import http from 'http';
+import { Server as socketIO } from 'socket.io';
 import Invoice from '../models/Invoice.js';
+
+const app = express();
+const server = http.createServer(app);
+const io = new socketIO(server);
+
 
 export const createInvoice = async (req, res) => {
     try {
